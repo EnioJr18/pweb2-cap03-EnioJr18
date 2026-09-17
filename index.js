@@ -93,6 +93,9 @@ const server = http.createServer((req, res) => {
     }
     return;
   }
+
+  res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+  res.end('Página não encontrada');
 });
 
 server.listen(PORT, () => console.log(`Servidor em http://localhost:${PORT}`));
