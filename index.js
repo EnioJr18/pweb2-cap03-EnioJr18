@@ -80,6 +80,19 @@ const server = http.createServer((req, res) => {
     res.end(resposta);
     return;
   }
+
+  if (req.method === 'GET' && req.url === '/secreto') {
+    const senha = req.headers['x-senha'];
+
+    if (senha === '1234') {
+      res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('Acesso liberado');
+    } else {
+      res.writeHead(401, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('Não autorizado');
+    }
+    return;
+  }
 });
 
 server.listen(PORT, () => console.log(`Servidor em http://localhost:${PORT}`));
