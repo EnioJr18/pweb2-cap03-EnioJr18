@@ -47,6 +47,12 @@ const server = http.createServer((req, res) => {
     res.end(`Item ${id} atualizado`);
     return;
   }
+
+  if (req.method === 'DELETE' && req.url.startsWith('/itens/')) {
+    res.writeHead(204);
+    res.end();
+    return;
+  }
 });
 
 server.listen(PORT, () => console.log(`Servidor em http://localhost:${PORT}`));
