@@ -65,6 +65,21 @@ const server = http.createServer((req, res) => {
     res.end();
     return;
   }
+
+  if (req.method === 'GET' && req.url === '/agente') {
+    const agente = req.headers['user-agent'] ? req.headers['user-agent'].toLowerCase() : '';
+    let resposta = 'Agente desconhecido';
+
+    if (agente.includes('curl')) {
+      resposta = 'Você é o cURL';
+    } else if (agente.includes('chrome')) {
+      resposta = 'Você é um navegador';
+    }
+
+    res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end(resposta);
+    return;
+  }
 });
 
 server.listen(PORT, () => console.log(`Servidor em http://localhost:${PORT}`));
