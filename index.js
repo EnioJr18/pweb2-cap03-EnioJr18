@@ -38,6 +38,15 @@ const server = http.createServer((req, res) => {
     
     return;
   }
+
+  if (req.method === 'PUT' && req.url.startsWith('/itens/')) {
+    const partes = req.url.split('/');
+    const id = partes[2]; 
+    
+    res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end(`Item ${id} atualizado`);
+    return;
+  }
 });
 
 server.listen(PORT, () => console.log(`Servidor em http://localhost:${PORT}`));
